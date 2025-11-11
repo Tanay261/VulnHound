@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>VulnHound Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1>VulnHound</h1>
+    <p class="lead">Passive recon + CVE mapping</p>
+
+    <form method="post" action="/scan" class="mb-3">
+      <div class="input-group">
+        <input class="form-control" name="domain" placeholder="example.com" required/>
+        <button class="btn btn-primary" type="submit">Start Scan</button>
+        <a class="btn btn-outline-secondary" href="/scan_demo">Demo Scan</a>
+      </div>
+    </form>
+
+    <h3>Recent scans</h3>
+    <ul class="list-group">
+      {% for s in scans %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ s.domain }}</strong> <small class="text-muted">({{ s.id }})</small>
+          <div><small>Status: {{ s.status }}</small></div>
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-sm btn-outline-primary" href="/results/{{ s.id }}">View</a>
+          <a class="btn btn-sm btn-outline-secondary" href="/raw/{{ s.id }}">JSON</a>
+          <a class="btn btn-sm btn-outline-danger" href="/delete/{{ s.id }}">Delete</a>
+        </div>
+      </li>
+      {% else %}
+      <li class="list-group-item">No scans yet (use the form above).</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
