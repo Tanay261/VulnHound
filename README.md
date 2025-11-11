@@ -1,4 +1,4 @@
-# VulnHound 🐾
+# VulnHound
 **Open-source passive recon & CVE mapping tool**
 
 VulnHound automates external attack-surface analysis:
